@@ -1,5 +1,5 @@
 all:
-	docker run --rm --mount type=bind,source=./,target=/build --user `id -u`:`id -g` krinkin/riscv64-crossbuild
+	docker run --rm --mount type=bind,source=`pwd`,target=/build --user `id -u`:`id -g` krinkin/riscv64-crossbuild
 
 clean:
 	rm ./*.o
