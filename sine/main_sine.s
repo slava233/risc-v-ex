@@ -1,6 +1,7 @@
 
 # syscalls
 exit    = 93
+ds	= 0x20000
 
 .section .data 
 
@@ -18,6 +19,8 @@ output:
 
 _start:     
 
+	# gp initialization
+	li	gp, ds
 
 	# Buffer initialisation will be here
 
