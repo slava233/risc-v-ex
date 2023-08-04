@@ -1,28 +1,38 @@
 .globl sine
 
-default_answer = 0x312d
-
 .section .data
-# if you need some data, put it here
+
 var:
 .align 8
 .space 100
 
+one:
+.asciz "1"
 
 .section .text
 
-# Sine
-#   Params
-#	a1 -- input buffer will contain string with the argument
-#	a2 -- output string buffer for the string result
 sine:
-	# implement here
+    lb a3, (a1)
+    lb t1, (one)
+    bne a3, t1, copy_input
+    beq a3, t1, copy_one
+    ret
 
-	la	a7, var
-	
-	li	a3, default_answer
-	sw	a3, 0(a2)
-	sw	a3, 0(a7)
+copy_input:
+    input_loop:
+        lb t2, 0(a1)
+        sb t2, 0(a2)
+        addi a1, a1, 1
+        addi a2, a2, 1
+        bnez t2, input_loop
+        ret
 
-	ret
-	
+copy_one:
+	la a1, one
+    one_loop:
+        lb t0, 0(a1)
+        sb t0, 0(a2)
+        addi a1, a1, 1
+        addi a2, a2, 1
+        bnez t0, one_loop
+        ret
