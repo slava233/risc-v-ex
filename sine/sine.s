@@ -1,13 +1,5 @@
 .globl sine
 
-.section .data
-
-var:
-.align 8
-.space 100
-
-.section .text
-
 sine:
     lb t1, (a1)
     li t2, 49
